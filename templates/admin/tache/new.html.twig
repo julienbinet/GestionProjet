@@ -1,0 +1,22 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ parent() }} : Nouvelle Tâche{% endblock %}
+
+{% block main %}
+    <h1>Créer une nouvelle Tâche</h1>
+
+    {{ include('admin/tache/_form.html.twig',{
+        include_annulation: true,
+    }) }}
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <div class="row">
+            <a href="{{ path('admin_tache_index') }}" class="btn btn-default pull-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>Retour aux tâches
+            </a>
+        </div>
+    </div>
+{% endblock %}

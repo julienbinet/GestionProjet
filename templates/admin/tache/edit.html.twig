@@ -1,0 +1,34 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} {{ parent() }} : Tâche : Modification{% endblock %}
+
+{% block main %}
+    <h1>Modification de la Tâche</h1>
+
+    {{ include('admin/tache/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+
+{% endblock %}
+
+
+{% block sidebar %}
+    <div class="section">
+        <div class="row">
+            <a href="{{ path('admin_projet_show', {id : tache.projet.id}) }}" class="btn btn-link pull-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>{{ tache.projet.name }}
+            </a>
+        </div>
+        <div class="row">
+            <a href="{{ path('admin_tache_index') }}" class="btn btn-default pull-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>Retour aux tâches
+            </a>
+        </div>
+        <div class="row">
+            <a href="{{ path('admin_tache_show', {id: tache.id}) }}" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-eye" aria-hidden="true"></i> Voir la tâche
+            </a>
+        </div>
+        <div class="row">
+            {{ include('admin/tache/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

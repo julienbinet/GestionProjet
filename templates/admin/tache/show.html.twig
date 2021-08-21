@@ -1,0 +1,55 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ parent() }} : Tâche : {{ tache.nom }}{% endblock %}
+
+{% block main %}
+    <h1>Tâche</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tache.id }}</td>
+            </tr>
+            <tr>
+                <th>Projet</th>
+                <td><a href="{{ path('admin_projet_show', {id: tache.projet.id}) }}">{{ tache.projet.name }}</a></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ tache.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ tache.description }}</td>
+            </tr>
+            <tr>
+                <th>Jour</th>
+                <td>{{ tache.jour ? tache.jour|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ tache.duree ? tache.duree|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <div class="row">
+            <a href="{{ path('admin_tache_index') }}" class="btn btn-default pull-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>Retour aux tâches
+            </a>
+        </div>
+        <div class="row">
+            <a href="{{ path('admin_tache_edit', {id: tache.id}) }}" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-eye" aria-hidden="true"></i> Modifier la tâche
+            </a>
+        </div>
+        <div class="row">
+            {{ include('admin/tache/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

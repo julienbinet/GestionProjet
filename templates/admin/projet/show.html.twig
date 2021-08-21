@@ -1,0 +1,100 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ parent() }} : Projet : {{ projet.name }}{% endblock %}
+
+{% block main %}
+    <h1>Projet</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ projet.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ projet.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ projet.description| nl2br }}</td>
+        </tr>
+        <tr>
+            <th>Date de début</th>
+            <td>{{ projet.dateDebut ? projet.dateDebut|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date de fin</th>
+            <td>{{ projet.dateFin ? projet.dateFin|date('Y-m-d') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Liste des tâches</h2>
+
+    {# Modal d'ajout d'une tache #}
+    {{ include('admin/projet/_form_tache.html.twig') }}
+
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            {#<th>Description</th>#}
+            <th>Jour</th>
+            <th>Duree</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tache in projet.taches %}
+            <tr>
+                <td>{{ tache.nom }}</td>
+                {#<td>{{ tache.description }}</td>#}
+                <td>{{ tache.jour ? tache.jour|date('d/m/Y') : '' }}</td>
+                <td>{{ tache.duree ? tache.duree|date('H:i') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_tache_show', {'id': tache.id}) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-eye" aria-hidden="true"></i>Voir
+                    </a>
+                    <a href="{{ path('admin_tache_edit', {'id': tache.id}) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-edit" aria-hidden="true"></i>Modifier
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune tâche trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+
+    <p>
+        Temps Total du projet : {{ total_duree }}
+    </p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <div class="row">
+            <a href="{{ path('admin_projet_index') }}" class="btn btn-default pull-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>Retour aux projets
+            </a>
+        </div>
+        <div class="row">
+            <a href="{{ path('admin_projet_edit', {id: projet.id}) }}" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-eye" aria-hidden="true"></i> Modifier le projet
+            </a>
+        </div>
+        <div class="row">
+            {{ include('admin/projet/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="section about">
+    <div class="well well-lg">
+        <p>
+            {#{{ 'help.app_description'|trans|raw }}#}
+            Ceci est une application de gestion de projets.
+        </p>
+        <p>
+            Elle permet de :
+        <ul>
+            <li>
+                Créer des projets
+            </li>
+            <li>
+                Leurs affecter des tâches avec une définition de celles-ci et un temps donné
+            </li>
+
+            <li>
+                Autre fonctionnalités à venir ...
+            </li>
+        </ul>
+        </p>
+    </div>
+</div>
+
+{# it's not mandatory to set the timezone in localizeddate(). This is done to
+   avoid errors when the 'intl' PHP extension is not available and the application
+   is forced to use the limited "intl polyfill", which only supports UTC and GMT #}
+<!-- Fragment rendered on {{ 'now'|localizeddate('long', 'long', null, 'UTC') }} -->

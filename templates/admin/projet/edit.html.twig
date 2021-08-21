@@ -1,0 +1,82 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ parent() }} : Projet : Modification{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div id="sidebar" class="col-sm-3 pull-right">
+
+
+            <div class="section">
+                <div class="row">
+                    <a href="{{ path('admin_projet_index') }}" class="btn btn-default pull-right">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>Retour aux projets
+                    </a>
+                </div>
+                <div class="row">
+                    <a href="{{ path('admin_projet_show', {id: projet.id}) }}" class="btn btn-lg btn-block btn-success">
+                        <i class="fa fa-eye" aria-hidden="true"></i> Voir le projet
+                    </a>
+                </div>
+                <div class="row">
+
+                    {{ include('admin/projet/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <div id="main" class="col-sm-9">
+            {{ include('default/_flash_messages.html.twig') }}
+            <h1>Modification du Projet</h1>
+            {#{{ include('admin/projet/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}#}
+            {{ form_start(form) }}
+            {#{{ form_widget(form.description) }}#}
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.date_debut) }}
+            {{ form_row(form.date_fin) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h2>Liste des tâches</h2>
+
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Jour</th>
+                    <th>Durée</th>
+                </tr>
+                </thead>
+                {# iterate over each existing tag and render its only field: name #}
+                {% for tache in form.taches %}
+                    <tr>
+
+                        <td>{{ form_widget(tache.nom) }}</td>
+                        <td>{{ form_widget(tache.description) }}</td>
+                        <td>{{ form_widget(tache.jour) }}</td>
+                        <td>{{ form_widget(tache.duree) }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <hr>
+            <button class="btn btn-primary">
+                <i class="fa fa-save" aria-hidden="true"></i> {{ button_label|default('Enregistrer') }}
+            </button>
+
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

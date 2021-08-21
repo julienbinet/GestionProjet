@@ -1,0 +1,52 @@
+{#
+   This is the base template of the all backend pages. Since this layout is similar
+   to the global layout, we inherit from it to just change the contents of some
+   blocks. In practice, backend templates are using a three-level inheritance,
+   showing how powerful, yet easy to use, is Twig's inheritance mechanism.
+   See https://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/admin.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/admin.js') }}"></script>
+    <script src="{{ asset('build/js/jb_main.js') }}"></script>
+{% endblock %}
+
+{% block header_navigation_links %}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="list">
+            <i class="fa fa-list" aria-hidden="true"></i> Liste
+            <span class="caret"></span>
+            <span class="sr-only">{{ app.user.fullname }}</span>
+        </a>
+        <ul class="dropdown-menu list" role="menu" aria-labelledby="list">
+            {#<li>#}
+                {#<a href="{{ path('admin_post_index') }}">#}
+                    {#<i class="fa fa-list-alt" aria-hidden="true"></i> Articles#}
+                {#</a>#}
+            {#</li>#}
+            {#<li class="divider"></li>#}
+            <li>
+                <a href="{{ path('admin_projet_index') }}">
+                    <i class="fa fa-list" aria-hidden="true"></i> Projets
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_tache_index') }}">
+                    <i class="fa fa-list" aria-hidden="true"></i> Tâches
+                </a>
+            </li>
+        </ul>
+    </li>
+    {#<li>#}
+        {#<a href="{{ path('blog_index') }}">#}
+            {#<i class="fa fa-home" aria-hidden="true"></i> {{ 'menu.back_to_blog'|trans }}#}
+        {#</a>#}
+    {#</li>#}
+{% endblock %}

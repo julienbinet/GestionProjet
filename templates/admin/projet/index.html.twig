@@ -1,0 +1,61 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ parent() }} : Liste des Projets{% endblock %}
+
+{% block body_id 'admin_projet_index' %}
+
+{% block main %}
+    <h1>Liste des Projets</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'projet.name'|trans }}</th>
+                {#<th>Description</th>#}
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            <tr>
+                <td>{{ projet.id }}</td>
+                <td>{{ projet.name }}</td>
+                {#<td>{{ projet.description }}</td>#}
+                <td>{{ projet.dateDebut ? projet.dateDebut|date('d/m/Y') : '' }}</td>
+                <td>{{ projet.dateFin ? projet.dateFin|date('d/m/Y') : '' }}</td>
+                <td>
+                    {#<a href="{{ path('admin_projet_show', {'id': projet.id}) }}">Voir</a>#}
+                    {#<a href="{{ path('admin_projet_edit', {'id': projet.id}) }}">Modifier</a>#}
+
+
+                    <a href="{{ path('admin_projet_show', {id: projet.id}) }}" class="btn btn-sm btn-default">
+                        <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                    </a>
+
+                    <a href="{{ path('admin_projet_edit', {id: projet.id}) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                    </a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun projet trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#<a href="{{ path('admin_projet_new') }}">Nouveau projet</a>#}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section actions">
+        <a href="{{ path('admin_projet_new') }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i> Nouveau projet
+        </a>
+    </div>
+{% endblock %}

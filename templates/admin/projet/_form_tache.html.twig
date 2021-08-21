@@ -1,0 +1,38 @@
+<div class="modal fade" id="new_tache" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center">Nouvelle tâche</h2>
+            </div>
+            <div class="modal-body">
+
+                {{ form_start(form) }}
+
+                <div class="hidden">
+                    {{ form_widget(form.projet) }}
+                    {{ form_widget(form.user) }}
+                </div>
+
+                {{ form_widget(form) }}
+                <button class="btn btn-primary">
+                    <i class="fa fa-save" aria-hidden="true"></i> {{ button_label|default('Enregistrer') }}
+                </button>
+
+                <button type="button" class="btn btn-default" id="btnNo" data-dismiss="modal">
+                    <i class="fa fa-ban" aria-hidden="true"></i> {{ 'label.cancel'|trans }}
+                </button>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<form method="post" action="{{ path('admin_projet_delete', {'id': projet.id}) }}" method="post" id="delete-form" data-modal="new_tache">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ projet.id) }}">
+    <button class="btn btn-succes btn-primary pull-right">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Nouvelle tâche
+    </button>
+</form>

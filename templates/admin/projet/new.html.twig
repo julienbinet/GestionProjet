@@ -1,0 +1,23 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ parent() }} : Nouveau Projet{% endblock %}
+
+{% block main %}
+    <h1>Création d'un Projet</h1>
+
+    {{ include('admin/projet/_form.html.twig',{
+        include_annulation: true,
+    }) }}
+
+    {#<a href="{{ path('admin_projet_index') }}">Retour à la liste des projets</a>#}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <div class="row">
+            <a href="{{ path('admin_projet_index') }}" class="btn btn-default pull-right">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>Retour aux projets
+            </a>
+        </div>
+    </div>
+{% endblock %}

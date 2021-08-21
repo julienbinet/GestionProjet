@@ -1,0 +1,1 @@
+$('#projet .input-group.date').parent().addClass('col-md-6')
